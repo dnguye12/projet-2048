@@ -98,8 +98,9 @@ int score(Plateau plat);
  **/
 bool nomoved(Plateau last, Plateau plat);
 
-/** ajouter un nouveau bloc sur le plateau
+/** ajouter un nouveau bloc sur le plateau (2 ou 4). Si le jouer etait gagnent, ajoute des blocs plus grands.
  * @param plateau un Plateau
+ * @return le plateau apres on a ajoute un nouveau bloc
  **/
 
 Plateau addblock(Plateau plat);

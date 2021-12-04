@@ -598,7 +598,7 @@ void endmenu(Plateau plat)
     while(true) {
         ch = getch();
         if(ch == 27) {
-            endwin;
+            endwin();
             break;
         }
     }
