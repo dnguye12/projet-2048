@@ -7,6 +7,7 @@ using namespace std;
 
 int main()
 {
-   tests();
-   return 0;
+    openmenu();
+    joue();
+    return 0;
 }
