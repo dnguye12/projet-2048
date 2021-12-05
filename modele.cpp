@@ -1,6 +1,5 @@
 #include "modele.h"
-
-
+#include "menu.cpp"
 
 
 Plateau plateauVide()
@@ -396,22 +395,28 @@ Plateau addblock(Plateau plat)
             {
 
                 int maxblock{2048};
-                for(int x = 0;x < 3; x++) {
-                    for(int y = 0; y < 3; y++) {
-                        if(plat[x][y] >= maxblock) {
+                for(int x = 0; x < 3; x++)
+                {
+                    for(int y = 0; y < 3; y++)
+                    {
+                        if(plat[x][y] >= maxblock)
+                        {
                             maxblock = plat[x][y];
                         }
                     }
                 }
                 int a = repow(maxblock);
                 int b = tireDeuxOuQuatre();
-                if(b == 2) {
+                if(b == 2)
+                {
                     plat[i][j]= tireDeuxOuQuatre();
-                break;
-                }else {
+                    break;
+                }
+                else
+                {
                     srand(time(0));
-                plat[i][j] = pow(2, (rand()%(a - 8) + 1));
-                break;
+                    plat[i][j] = pow(2, (rand()%(a - 8) + 1));
+                    break;
                 }
 
             }
@@ -498,174 +503,151 @@ void dessinecolor(Plateau plat)
 }
 
 
-void openmenu()
-{
-    initscr();
-    start_color();
-    clear();
-    noecho();
-    curs_set(0);
-    keypad(stdscr, 1);
-    string l1 =  R"(
-				     _______  ________  ___   ___  ________
-				    /  ___  \|\   __  \|\  \ |\  \|\   __  \
-				   /__/|_/  /\ \  \|\  \ \  \\_\  \ \  \|\  \
-				   |__|//  / /\ \  \\\  \ \______  \ \   __  \
-				       /  /_/__\ \  \\\  \|_____|\  \ \  \|\  \
-				      |\________\ \_______\     \ \__\ \_______\
-				       \|_______|\|_______|      \|__|\|_______|
-
-
-)";
-    init_pair(10, 10, COLOR_BLACK);
-    attron(COLOR_PAIR(10));
-    printw(l1.c_str());
-    attroff(COLOR_PAIR(10));
-    printw("\n\n\n");
-    printw("\t\t\t\t  Appuyez sur n'importe quelle touche pour continuer");
-    getch();
-    refresh();
-    endwin();
-}
-
-
-void initcolor() {
-    init_pair(1, 1, COLOR_BLACK);
-    init_pair(2, 2, COLOR_BLACK);
-    init_pair(3, 3, COLOR_BLACK);
-    init_pair(4, 4, COLOR_BLACK);
-    init_pair(5, 5, COLOR_BLACK);
-    init_pair(6, 6, COLOR_BLACK);
-    init_pair(7, 7, COLOR_BLACK);
-    init_pair(8, 9, COLOR_BLACK);
-    init_pair(9, 10, COLOR_BLACK);
-    init_pair(10, 11, COLOR_BLACK);
-    init_pair(11, 12, COLOR_BLACK);
-    init_pair(12, 13, COLOR_BLACK);
-    init_pair(13, 14, COLOR_BLACK);
-}
-
-void gamemenu(Plateau plat) {
-    start_color();
-    initcolor();
-
-        string l2 =R"(			       			      COMMANDES
-	        		       ,---,			           ,---,
-	        		       | H |			           | ^ |
-	    			   ,---,---,---,		       ,---,---,---,
-	    			   | G | B | D |		       | < | v | > |
-	    			   '---'---'---'		       '---'---'---')";
-    printw("\n");
-    printw("\t\t\t\t\t  Appuyez sur Esc pour quitter le jeux ");
-    printw("\n\t\t\t\t\t\t\tScore: ");
-    printw(to_string(score(plat)).c_str());
-    printw("\n\n\n");
-    dessinecolor(plat);
-    printw("\n");
-    printw(l2.c_str());
-}
-
-void endmenu(Plateau plat)
-{
-    int ch;
-    initscr();
-    start_color();
-    initcolor();
-    string gameover = R"(
-		 ________  ________  _____ ______   _______           ________  ___      ___ _______   ________
-		|\   ____\|\   __  \|\   _ \  _   \|\  ___ \         |\   __  \|\  \    /  /|\  ___ \ |\   __  \
-		\ \  \___|\ \  \|\  \ \  \\\__\ \  \ \   __/|        \ \  \|\  \ \  \  /  / | \   __/|\ \  \|\  \
-		 \ \  \  __\ \   __  \ \  \\|__| \  \ \  \_|/__       \ \  \\\  \ \  \/  / / \ \  \_|/_\ \   _  _\
-		  \ \  \|\  \ \  \ \  \ \  \    \ \  \ \  \_|\ \       \ \  \\\  \ \    / /   \ \  \_|\ \ \  \\  \|
-		   \ \_______\ \__\ \__\ \__\    \ \__\ \_______\       \ \_______\ \__/ /     \ \_______\ \__\\ _\
-		    \|_______|\|__|\|__|\|__|     \|__|\|_______|        \|_______|\|__|/       \|_______|\|__|\|__|
-
-
-
-)";
-    printw("\n");
-    attron(COLOR_PAIR(8));
-    printw("\t\t\t\t\t  Appuyez sur Esc pour quitter le jeux ");
-    attroff(COLOR_PAIR(8));
-    printw("\n\t\t\t\t\t\t\tScore: ");
-    printw(to_string(score(plat)).c_str());
-    printw("\n\n\n");
-    dessinecolor(plat);
-    printw("\n");
-    attron(COLOR_PAIR(8));
-    printw(gameover.c_str());
-    attroff(COLOR_PAIR(8));
-    while(true) {
-        ch = getch();
-        if(ch == 27) {
-            endwin;
-            break;
-        }
-    }
-}
-
-
 void joue()
 {
     Plateau plat = plateauInitial();
     Plateau last = plateauVide();
     int ch;
+    bool ai{false};
     initscr();
     clear();
     noecho();
     curs_set(0);
     keypad(stdscr, 1);
     nodelay(stdscr, 1);
-    gamemenu(plat);
+    gamemenu(plat, ai);
     refresh();
 
     while (true)
     {
         ch = getch();
-        erase();
-        gamemenu(plat);
+        if(ai == true) {
+            if(ch == 'a')
+            {
+                ai = false;
+                continue;
+            }
+            if(ch == 27)
+            {
+                break;
+            }
+            sleep_for(nanoseconds(250000000));
+            erase();
+            gamemenu(plat, ai);
 
-        if(estTermine(plat))
-        {
-            clear();
-            endwin();
-            endmenu(plat);
-            break;
 
+            if(estTermine(plat))
+            {
+                clear();
+                endwin();
+                endmenu(plat);
+                break;
+
+            }
+
+            if(estGagnant(plat))
+            {
+                attron(COLOR_PAIR(10));
+                printw("\n\n\t\t\t\t\t\tVous avez atteint");
+                attroff(COLOR_PAIR(10));
+                attron(COLOR_PAIR(11));
+                printw(" 2048");
+                attroff(COLOR_PAIR(11));
+                attron(COLOR_PAIR(10));
+                printw("!!!");
+                attroff(COLOR_PAIR(10));
+
+            }
+
+            last = plat;
+            if(ch == 'a')
+            {
+                ai = false;
+                continue;
+            }
+            if(ch == 27)
+            {
+                break;
+            }
+            if(ai == true)
+            {
+                if(nomoved(last, plat))
+                {
+                    plat = deplacementBas(plat);
+                }
+
+                if(nomoved(last, plat))
+                {
+                    plat = deplacementDroite(plat);
+                }
+
+                if(nomoved(last, plat))
+                {
+                    plat = deplacementGauche(plat);
+                }
+
+                if(nomoved(last, plat))
+                {
+                    plat = deplacementHaut(plat);
+                }
+                plat = addblock(plat);
+            }
+
+            refresh();
+        }else {
+            erase();
+            gamemenu(plat, ai);
+            if(ch == 'a')
+            {
+                ai = true;
+                continue;
+            }
+            if(ch == 27)
+            {
+                break;
+            }
+
+            if(estTermine(plat))
+            {
+                clear();
+                endwin();
+                endmenu(plat);
+                break;
+
+            }
+
+            if(estGagnant(plat))
+            {
+                attron(COLOR_PAIR(10));
+                printw("\n\n\t\t\t\t\t\tVous avez atteint");
+                attroff(COLOR_PAIR(10));
+                attron(COLOR_PAIR(11));
+                printw(" 2048");
+                attroff(COLOR_PAIR(11));
+                attron(COLOR_PAIR(10));
+                printw("!!!");
+                attroff(COLOR_PAIR(10));
+
+            }
+
+            last = plat;
+            if(ch == 'a')
+            {
+                ai = true;
+                continue;
+            }
+            if(ch == 27)
+            {
+                break;
+            }
+            plat = deplacement(plat, ch);
+            if(!nomoved(last, plat))
+            {
+                plat = addblock(plat);
+            }
+
+            refresh();
         }
-
-        if(estGagnant(plat))
-        {
-            attron(COLOR_PAIR(10));
-            printw("\n\n\t\t\t\t\t\tVous avez atteint");
-            attroff(COLOR_PAIR(10));
-            attron(COLOR_PAIR(11));
-            printw(" 2048");
-            attroff(COLOR_PAIR(11));
-            attron(COLOR_PAIR(10));
-            printw("!!!");
-            attroff(COLOR_PAIR(10));
-
-        }
-
-        if(estTermine(plat))
-        {
-            endmenu(plat);
-            break;
-        }
-
-        last = plat;
-        if(ch == 27)
-        {
-            break;
-        }
-        plat = deplacement(plat, ch);
-        if(!nomoved(last, plat))
-        {
-            plat = addblock(plat);
-        }
-
-        refresh();
 
     }
 
