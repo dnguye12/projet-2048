@@ -21,56 +21,56 @@ typedef vector<vector<int> > Plateau;
 map<string, int> score_list;
 
 
-/** génère un Plateau de dimensions 4*4 ne contenant que des 0
+/** gï¿½nï¿½re un Plateau de dimensions 4*4 ne contenant que des 0
  *  @return un Plateau vide
  **/
 Plateau plateauVide();
 
 
-/** génère deux nombres sur des cases aléatoires d'un Plateau vide
- *  @return un Plateau en début de jeu
+/** gï¿½nï¿½re deux nombres sur des cases alï¿½atoires d'un Plateau vide
+ *  @return un Plateau en dï¿½but de jeu
  **/
 Plateau plateauInitial();
 
 
-/** génère aléatoirement un 2 ou un 4 avec des probabilités respectives de 9/10 et 1/10
+/** gï¿½nï¿½re alï¿½atoirement un 2 ou un 4 avec des probabilitï¿½s respectives de 9/10 et 1/10
  *  @return 2 ou 4
  **/
 int tireDeuxOuQuatre();
 
 
-/** déplace les tuiles d'un Plateau vers la gauche et les combine si possible
+/** dï¿½place les tuiles d'un Plateau vers la gauche et les combine si possible
  *  @param plateau le Plateau
- *  @return le Plateau une fois déplacé vers la gauche
+ *  @return le Plateau une fois dï¿½placï¿½ vers la gauche
  **/
 Plateau deplacementGauche(Plateau plateau);
 
 
-/** déplace les tuiles d'un Plateau vers la droite et les combine si possible
+/** dï¿½place les tuiles d'un Plateau vers la droite et les combine si possible
  *  @param plateau le Plateau
- *  @return le Plateau une fois déplacé vers la droite
+ *  @return le Plateau une fois dï¿½placï¿½ vers la droite
  **/
 Plateau deplacementDroite(Plateau plateau);
 
 
-/** déplace les tuiles d'un Plateau vers le haut et les combine si possible
+/** dï¿½place les tuiles d'un Plateau vers le haut et les combine si possible
  *  @param plateau le Plateau
- *  @return le Plateau une fois déplacé vers le haut
+ *  @return le Plateau une fois dï¿½placï¿½ vers le haut
  **/
 Plateau deplacementHaut(Plateau plateau);
 
 
-/** déplace les tuiles d'un Plateau vers le bas et les combine si possible
+/** dï¿½place les tuiles d'un Plateau vers le bas et les combine si possible
  *  @param plateau le Plateau
- *  @return le Plateau une fois déplacé vers le bas
+ *  @return le Plateau une fois dï¿½placï¿½ vers le bas
  **/
 Plateau deplacementBas(Plateau plateau);
 
 
-/** déplace les tuiles d'un Plateau dans la direction donnée et génère une nouvelle tuile si le déplacement est valide
+/** dï¿½place les tuiles d'un Plateau dans la direction donnï¿½e et gï¿½nï¿½re une nouvelle tuile si le dï¿½placement est valide
  *  @param plateau le Plateau
  *  @param direction la direction
- *  @return le Plateau déplacé dans la direction
+ *  @return le Plateau dï¿½placï¿½ dans la direction
  **/
 Plateau deplacement(Plateau plateau, int direction);
 
@@ -81,14 +81,14 @@ Plateau deplacement(Plateau plateau, int direction);
 string dessine(Plateau p);
 
 
-/** permet de savoir si une partie est terminée
+/** permet de savoir si une partie est terminï¿½e
  *  @param plateau un Plateau
  *  @return true si le plateau est vide, false sinon
  **/
 bool estTermine(Plateau plateau);
 
 
-/** permet de savoir si une partie est gagnée
+/** permet de savoir si une partie est gagnï¿½e
  * @param plateau un Plateau
  * @return true si le plateau contient un 2048, false sinon
  **/
