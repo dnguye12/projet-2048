@@ -81,7 +81,7 @@ Plateau deplacementGauche(Plateau plat)
                         }
                         else
                         {
-                            plat[hi][++hj]=plat[i][j];
+                            plat[hi][hj+1]=plat[i][j];
                             plat[i][j]=0;
                         }
                     }
@@ -123,7 +123,7 @@ Plateau deplacementDroite(Plateau plat)
                         }
                         else
                         {
-                            plat[hi][--hj]=plat[i][j];
+                            plat[hi][hj-1]=plat[i][j];
                             plat[i][j]=0;
                         }
                     }
@@ -165,7 +165,7 @@ Plateau deplacementHaut(Plateau plat)
                         }
                         else
                         {
-                            plat[++hi][hj]=plat[i][j];
+                            plat[hi+1][hj]=plat[i][j];
                             plat[i][j]=0;
                         }
                     }
@@ -208,7 +208,7 @@ Plateau deplacementBas(Plateau plat)
                         }
                         else
                         {
-                            plat[--hi][hj]=plat[i][j];
+                            plat[hi-1][hj]=plat[i][j];
                             plat[i][j]=0;
                         }
                     }
