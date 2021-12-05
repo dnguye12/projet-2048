@@ -57,13 +57,13 @@ void openmenu()
         case KEY_UP:
             highlight--;
             if(highlight < 0) {
-                highlight = 0;
+                highlight = 2;
             }
             break;
         case KEY_DOWN:
             highlight++;
             if(highlight > 2) {
-                highlight = 2;
+                highlight = 0;
             }
             break;
         default:
@@ -73,11 +73,18 @@ void openmenu()
         if(choice == 10) {
             if(highlight == 0) {
                 joue();
+                endwin();
+                break;
             }
             if(highlight == 1) {
                 joue_var();
+                endwin();
+                break;
             }
-            break;
+            if(highlight == 2) {
+                endwin();
+                break;
+            }
         }
     }
 }

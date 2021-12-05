@@ -27,9 +27,9 @@ void gamemenu_var(Plateau plat1, Plateau plat2, bool ai)
         printw("\t\t\t\t\t\t     AI deactivate!");
         attroff(COLOR_PAIR(8));
     }
-    printw("\n\n\n");
-    dessinecolor(plat1);
     printw("\n\n");
+    dessinecolor(plat1);
+    printw("\n");
     dessinecolor(plat2);
     printw("\n");
     printw(l2.c_str());
