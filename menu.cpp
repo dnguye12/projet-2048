@@ -1,13 +1,22 @@
 #include "modele.h"
+#include "var.h"
 
 void openmenu()
 {
     initscr();
-    start_color();
-    clear();
     noecho();
+    start_color();
     curs_set(0);
-    keypad(stdscr, 1);
+
+    int y, x;
+    getmaxyx(stdscr, y, x);
+
+    string choices[3] = {"Classique",
+                         "Deux Tables",
+                         "Quitter"};
+    int choice;
+    int highlight{0};
+
     string l1 =  R"(
 				     _______  ________  ___   ___  ________
 				    /  ___  \|\   __  \|\  \ |\  \|\   __  \
@@ -23,11 +32,54 @@ void openmenu()
     attron(COLOR_PAIR(10));
     printw(l1.c_str());
     attroff(COLOR_PAIR(10));
-    printw("\n\n\n");
-    printw("\t\t\t\t  Appuyez sur n'importe quelle touche pour continuer");
-    getch();
+
+    WINDOW * menu = newwin(5, x - 107, y - 20, 53);
+    box(menu, 0 , 0);
     refresh();
-    endwin();
+    wrefresh(menu);
+
+    keypad(menu, 1);
+
+
+    while(1)
+    {
+        for(int i = 0; i < 3; i++)
+        {
+            if(i == highlight)
+            {
+                wattron(menu, A_REVERSE);}
+                mvwprintw(menu, i+1, 1, choices[i].c_str());
+                wattroff(menu, A_REVERSE);
+
+        }
+        choice = wgetch(menu);
+        switch(choice) {
+        case KEY_UP:
+            highlight--;
+            if(highlight < 0) {
+                highlight = 0;
+            }
+            break;
+        case KEY_DOWN:
+            highlight++;
+            if(highlight > 2) {
+                highlight = 2;
+            }
+            break;
+        default:
+            break;
+        }
+
+        if(choice == 10) {
+            if(highlight == 0) {
+                joue();
+            }
+            if(highlight == 1) {
+                joue_var();
+            }
+            break;
+        }
+    }
 }
 
 
@@ -118,7 +170,6 @@ void endmenu(Plateau plat)
         }
     }
 }
-
 
 
 
