@@ -1,7 +1,7 @@
 #include "modele.h"
 #include "var.h"
 
-void openmenu()
+void menuaccueil()
 {
     initscr();
     noecho();
@@ -11,9 +11,9 @@ void openmenu()
     int y, x;
     getmaxyx(stdscr, y, x);
 
-    string choices[3] = {"Classique",
-                         "Deux Tables",
-                         "Quitter"};
+    string choices[3] = {"1. Classique",
+                         "2. Deux Tables",
+                         "3. Quitter"};
     int choice;
     int highlight{0};
 
@@ -30,11 +30,11 @@ void openmenu()
 )";
     init_pair(10, 10, COLOR_BLACK);
     attron(COLOR_PAIR(10));
+    printw("\n\n\n\n\n");
     printw(l1.c_str());
     attroff(COLOR_PAIR(10));
 
-    WINDOW * menu = newwin(5, x - 107, y - 20, 53);
-    box(menu, 0 , 0);
+    WINDOW * menu = newwin(5, x - 107, y - 53, 50);
     refresh();
     wrefresh(menu);
 
@@ -106,7 +106,7 @@ void initcolor() {
     init_pair(13, 14, COLOR_BLACK);
 }
 
-void gamemenu(Plateau plat, bool ai) {
+void menudejeu(Plateau plat, bool ai) {
     start_color();
     initcolor();
 
@@ -119,18 +119,18 @@ void gamemenu(Plateau plat, bool ai) {
     printw("\n");
     printw("\t\t\t\t\t  Appuyez sur Esc pour quitter le jeux ");
     printw("\n\t\t\t\t\t\t\tScore: ");
-    printw(to_string(score(plat)).c_str());
+    printw(to_string(score(plat) -16).c_str());
     printw("\n");
     if(ai)
     {
         attron(COLOR_PAIR(9));
-        printw("\t\t\t\t\t\t     AI activated!");
+        printw("\t\t\t\t\t\t     IA activée");
         attroff(COLOR_PAIR(9));
     }
     else
     {
         attron(COLOR_PAIR(8));
-        printw("\t\t\t\t\t\t     AI deactivate!");
+        printw("\t\t\t\t\t\t     IA désactivée");
         attroff(COLOR_PAIR(8));
     }
     printw("\n\n\n");
@@ -139,7 +139,7 @@ void gamemenu(Plateau plat, bool ai) {
     printw(l2.c_str());
 }
 
-void endmenu(Plateau plat)
+void findepartie(Plateau plat)
 {
     int ch;
     initscr();
@@ -162,7 +162,7 @@ void endmenu(Plateau plat)
     printw("\t\t\t\t\t  Appuyez sur Esc pour quitter le jeux ");
     attroff(COLOR_PAIR(8));
     printw("\n\t\t\t\t\t\t\tScore: ");
-    printw(to_string(score(plat)).c_str());
+    printw(to_string(score(plat) - 16).c_str());
     printw("\n\n\n");
     dessinecolor(plat);
     printw("\n");
