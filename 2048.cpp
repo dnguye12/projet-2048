@@ -1,13 +1,12 @@
 #include "modele.h"
 #include "modele.cpp"
-#include "check.cpp"
 #include "var.cpp"
-
+#include "tests.cpp"
 #include <iostream>
 using namespace std;
 
-int main()
-{
-    openmenu();
-    return 0;
+int main(){
+    tests();
+    menuaccueil();
+   return 0;
 }
