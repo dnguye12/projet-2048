@@ -18,7 +18,7 @@ using namespace std::chrono;
 
 /** afficher le premier menu du jeux
  **/
-void openmenu();
+void menuaccueil();
 
 
 /** initialize les colours pour ncurses
@@ -30,13 +30,13 @@ void initcolor();
  * @param plat le Plateau
  * @param ai l'etat de ai(true ou false)
  **/
-void gamemenu(Plateau plat, bool ai);
+void menudejeu(Plateau plat, bool ai);
 
 
 
 /** afficher le menu quand le jouer a perdu
 * @param plat le Plateau
 **/
-void endmenu(Plateau plat)
+void findepartie(Plateau plat)
 
 #endif // MENU_H_INCLUDED
