@@ -21,7 +21,7 @@ using namespace std::chrono;
 * @param Plateau plat2 le deuxieme plateau
 * @param bool L'etat de AI
 **/
-void gamemenu_var(Plateau plat1, Plateau plat2, bool ai);
+void menudejeu_var(Plateau plat1, Plateau plat2, bool ai);
 
 
 /**Affiche le menu de la variation quand le jouer a perdu
@@ -29,7 +29,7 @@ void gamemenu_var(Plateau plat1, Plateau plat2, bool ai);
 * @param Plateau plat2 le deuxieme plateau
 * @param bool L'etat de AI
 **/
-void endmenu_var(Plateau plat1, Plateau plat2, bool ai);
+void findepartie_var(Plateau plat1, Plateau plat2, bool ai);
 
 
 /** la fonction tireDeuxOuQuatre pour la mode variation
@@ -39,7 +39,7 @@ int tireDeuxOuQuatre_var();
 
 
 /** la fonction plateauInitial pour la mode variation
-* @return un Plateau en d�but de jeu
+* @return un Plateau en début de jeu
 **/
 Plateau plateauInitial_var();
 
