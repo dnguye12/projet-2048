@@ -1,9 +1,9 @@
-
 output: 2048.o
-	g++ 2048.o -o output -lncurses
+	info-111 g++ 2048.o -o 2048 -lncurses
 
 main.o: 2048.cpp
-	g++ -c 2048.cpp -lncurses
+	info-111 g++ -c 2048.cpp -lncurses
 
 clean:
-	rm *.o output
+	rm *.o 
+	rm 2048
