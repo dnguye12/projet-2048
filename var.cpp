@@ -1,5 +1,4 @@
-
-void gamemenu_var(Plateau plat1, Plateau plat2, bool ai)
+void menudejeu_var(Plateau plat1, Plateau plat2, bool ai)
 {
     start_color();
     initcolor();
@@ -13,18 +12,18 @@ void gamemenu_var(Plateau plat1, Plateau plat2, bool ai)
     printw("\n");
     printw("\t\t\t\t\t  Appuyez sur Esc pour quitter le jeux ");
     printw("\n\t\t\t\t\t\t\tScore: ");
-    printw(to_string(score(plat1)/2 + score(plat2)/2).c_str());
+    printw(to_string(score(plat1)/2 + score(plat2)/2 - 16).c_str());
     printw("\n");
     if(ai)
     {
         attron(COLOR_PAIR(9));
-        printw("\t\t\t\t\t\t     AI activated!");
+        printw("\t\t\t\t\t\t     IA activée");
         attroff(COLOR_PAIR(9));
     }
     else
     {
         attron(COLOR_PAIR(8));
-        printw("\t\t\t\t\t\t     AI deactivate!");
+        printw("\t\t\t\t\t\t     IA désactivée");
         attroff(COLOR_PAIR(8));
     }
     printw("\n\n");
@@ -35,7 +34,7 @@ void gamemenu_var(Plateau plat1, Plateau plat2, bool ai)
     printw(l2.c_str());
 }
 
-void endmenu_var(Plateau plat1, Plateau plat2, bool ai)
+void findepartie_var(Plateau plat1, Plateau plat2, bool ai)
 {
     int ch;
     initscr();
@@ -58,10 +57,10 @@ void endmenu_var(Plateau plat1, Plateau plat2, bool ai)
     printw("\t\t\t\t\t  Appuyez sur Esc pour quitter le jeux ");
     attroff(COLOR_PAIR(8));
     printw("\n\t\t\t\t\t\t\tScore: ");
-    printw(to_string(score(plat1)/2 + score(plat2)/2).c_str());
+    printw(to_string(score(plat1)/2 + score(plat2)/2 - 16).c_str());
     printw("\n");
     attron(COLOR_PAIR(8));
-    printw("\t\t\t\t\t\t     AI deactivate!");
+    printw("\t\t\t\t\t\t     IA désactivée!");
     attroff(COLOR_PAIR(8));
     printw("\n\n\n");
     dessinecolor(plat1);
@@ -183,7 +182,7 @@ void joue_var()
     curs_set(0);
     keypad(stdscr, 1);
     nodelay(stdscr, 1);
-    gamemenu_var(plat1, plat2, ai);
+    menudejeu_var(plat1, plat2, ai);
     refresh();
 
     while (true)
@@ -202,13 +201,13 @@ void joue_var()
             }
             sleep_for(nanoseconds(250000000));
             erase();
-            gamemenu_var(plat1, plat2, ai);
+            menudejeu_var(plat1, plat2, ai);
 
             if(estTermine(plat1) || estTermine(plat2))
             {
                 clear();
                 endwin();
-                endmenu_var(plat1,plat2, ai);
+                findepartie_var(plat1,plat2, ai);
                 break;
 
             }
@@ -240,43 +239,43 @@ void joue_var()
             }
             if(ai == true)
             {
-                if(nomoved(last1, plat1))
+                if(notmoved(last1, plat1))
                 {
                     plat1 = deplacementBas(plat1);
                 }
 
-                if(nomoved(last1, plat1))
+                if(notmoved(last1, plat1))
                 {
                     plat1 = deplacementDroite(plat1);
                 }
 
-                if(nomoved(last1, plat1))
+                if(notmoved(last1, plat1))
                 {
                     plat1 = deplacementGauche(plat1);
                 }
 
-                if(nomoved(last1, plat1))
+                if(notmoved(last1, plat1))
                 {
                     plat1 = deplacementHaut(plat1);
                 }
                 plat1 = addblock(plat1);
 
-                if(nomoved(last2, plat2))
+                if(notmoved(last2, plat2))
                 {
                     plat2 = deplacementBas(plat2);
                 }
 
-                if(nomoved(last2, plat2))
+                if(notmoved(last2, plat2))
                 {
                     plat2 = deplacementDroite(plat2);
                 }
 
-                if(nomoved(last2, plat2))
+                if(notmoved(last2, plat2))
                 {
                     plat2 = deplacementGauche(plat2);
                 }
 
-                if(nomoved(last2, plat2))
+                if(notmoved(last2, plat2))
                 {
                     plat2 = deplacementHaut(plat2);
                 }
@@ -295,15 +294,14 @@ void joue_var()
             {
                 break;
             }
-            sleep_for(nanoseconds(250000000));
             erase();
-            gamemenu_var(plat1, plat2, ai);
+            menudejeu_var(plat1, plat2, ai);
 
             if(estTermine(plat1) || estTermine(plat2))
             {
                 clear();
                 endwin();
-                endmenu_var(plat1,plat2, ai);
+                findepartie_var(plat1,plat2, ai);
                 break;
 
             }
@@ -336,12 +334,12 @@ void joue_var()
             plat1 = deplacement(plat1, ch);
             plat2 = deplacement(plat2, ch);
 
-            if(!nomoved(last1, plat1))
+            if(!notmoved(last1, plat1))
             {
                 plat1 = addblock(plat1);
             }
 
-            if(!nomoved(last2, plat2))
+            if(!notmoved(last2, plat2))
             {
                 plat2 = addblock_var(plat2);
             }
