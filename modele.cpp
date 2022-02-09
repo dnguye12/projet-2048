@@ -362,7 +362,7 @@ int score(Plateau plat)
 
 }
 
-bool nomoved(Plateau last, Plateau plat)
+bool notmoved(Plateau last, Plateau plat)
 {
     int i,j;
     for(i=0; i<4; i++)
@@ -511,11 +511,11 @@ void joue()
     bool ai{false};
     initscr();
     clear();
-    noecho();
+    //noecho();
     curs_set(0);
     keypad(stdscr, 1);
     nodelay(stdscr, 1);
-    gamemenu(plat, ai);
+    menudejeu(plat, ai);
     refresh();
 
     while (true)
@@ -533,14 +533,14 @@ void joue()
             }
             sleep_for(nanoseconds(250000000));
             erase();
-            gamemenu(plat, ai);
+            menudejeu(plat, ai);
 
 
             if(estTermine(plat))
             {
                 clear();
                 endwin();
-                endmenu(plat);
+                findepartie(plat);
                 break;
 
             }
@@ -571,22 +571,22 @@ void joue()
             }
             if(ai == true)
             {
-                if(nomoved(last, plat))
+                if(notmoved(last, plat))
                 {
                     plat = deplacementBas(plat);
                 }
 
-                if(nomoved(last, plat))
+                if(notmoved(last, plat))
                 {
                     plat = deplacementDroite(plat);
                 }
 
-                if(nomoved(last, plat))
+                if(notmoved(last, plat))
                 {
                     plat = deplacementGauche(plat);
                 }
 
-                if(nomoved(last, plat))
+                if(notmoved(last, plat))
                 {
                     plat = deplacementHaut(plat);
                 }
@@ -596,7 +596,7 @@ void joue()
             refresh();
         }else {
             erase();
-            gamemenu(plat, ai);
+            menudejeu(plat, ai);
             if(ch == 'a')
             {
                 ai = true;
@@ -611,7 +611,7 @@ void joue()
             {
                 clear();
                 endwin();
-                endmenu(plat);
+                findepartie(plat);
                 break;
 
             }
@@ -641,7 +641,7 @@ void joue()
                 break;
             }
             plat = deplacement(plat, ch);
-            if(!nomoved(last, plat))
+            if(!notmoved(last, plat))
             {
                 plat = addblock(plat);
             }
